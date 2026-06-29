@@ -2,9 +2,96 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码质量检测系统</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Hello Spring Boot!</h1>
+    <div class="container">
+        <header>
+            <h1>🔍 代码质量检测系统</h1>
+            <p class="subtitle">Code Quality Checker System</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab active" onclick="switchTab('check')">代码检测</button>
+            <button class="tab" onclick="switchTab('records')">检测记录</button>
+            <button class="tab" onclick="switchTab('stats')">统计概览</button>
+        </nav>
+
+        <!-- 代码检测 -->
+        <section id="tab-check" class="tab-content active">
+            <div class="card">
+                <h3>📄 粘贴源代码</h3>
+                <div class="form-group">
+                    <label>文件名：</label>
+                    <input type="text" id="fileName" value="Demo.java" placeholder="文件名">
+                </div>
+                <div class="form-group">
+                    <label>文件类型：</label>
+                    <select id="fileType">
+                        <option value=".java">Java</option>
+                        <option value=".xml">XML</option>
+                        <option value=".properties">Properties</option>
+                        <option value=".html">HTML</option>
+                    </select>
+                </div>
+                <textarea id="codeInput" rows="15" placeholder="请粘贴Java源代码...">package com.example.demo;
+
+public class Demo {
+    private int count = 1000;
+
+    public void run() {
+        int x = 999;
+        System.out.println(x);
+        System.exit(0);
+    }
+}</textarea>
+                <button class="btn-primary" onclick="submitCheck()">🚀 开始检测</button>
+            </div>
+
+            <div id="resultArea" class="card hidden">
+                <h3>📊 检测结果</h3>
+                <div id="resultSummary"></div>
+                <div id="resultIssues"></div>
+            </div>
+        </section>
+
+        <!-- 检测记录 -->
+        <section id="tab-records" class="tab-content">
+            <div class="card">
+                <h3>📋 检测记录列表</h3>
+                <button class="btn-secondary" onclick="loadRecords()">🔄 刷新</button>
+                <table id="recordsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>文件名</th>
+                            <th>状态</th>
+                            <th>问题数</th>
+                            <th>评分</th>
+                            <th>时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 统计概览 -->
+        <section id="tab-stats" class="tab-content">
+            <div class="card">
+                <h3>📈 系统统计</h3>
+                <div id="statsContent" class="stats-grid"></div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>代码质量检测系统 v1.0 | 基于 Spring Boot</p>
+    </footer>
+
+    <script src="js/app.js"></script>
 </body>
 </html>
